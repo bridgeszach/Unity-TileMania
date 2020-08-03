@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinPickup : MonoBehaviour
+public class HeartScript : MonoBehaviour
 {
-    [SerializeField] AudioClip coinSFX;
-    [SerializeField] int coinValue = 20;
+    [SerializeField] AudioClip heartSFX;
+    int heartValue = 1;
 
-    // Cached References
     AudioSource myAudio;
 
     private void Start()
@@ -17,8 +16,9 @@ public class CoinPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        FindObjectOfType<GameSession>().AddToScore(coinValue);
-        AudioSource.PlayClipAtPoint(coinSFX, Camera.main.transform.position);
+        FindObjectOfType<GameSession>().AddLife(heartValue);
+
+        AudioSource.PlayClipAtPoint(heartSFX, Camera.main.transform.position);
         Destroy(gameObject);
     }
 }

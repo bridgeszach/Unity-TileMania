@@ -5,8 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
-  public void StartIntro()
+  public void StartLevel()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("Level 1");
+    }
+
+  
+  public void ControlsMenu()
+    {
+        SceneManager.LoadScene("Controls");
+    }
+
+    
+    public void StartMenu()
+    {
+        SceneManager.LoadScene("Start Screen");
+    }
+
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

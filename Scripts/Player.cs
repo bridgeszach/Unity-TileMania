@@ -23,14 +23,25 @@ public class Player : MonoBehaviour
     BoxCollider2D myFeet;
     float gravityScale;
 
+    // Speed Boost Variables
+    public float boostTime = 2.0f;
+    float currentBoostTime;
+    float boostDelayTime = 5.0f;
+    float currentBoostDelayTime;
+    bool boosting = false;
+    float time;
+
     // Start is called before the first frame update
     void Start()
     {
+        currentBoostTime = 0f;
+        currentBoostDelayTime = 0f;
+        
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myBodyCollider = GetComponent<CapsuleCollider2D>();
         myFeet = GetComponent<BoxCollider2D>();
-        gravityScale = myRigidBody.gravityScale;
+        gravityScale = myRigidBody.gravityScale;        
     }
 
     // Update is called once per frame
@@ -43,6 +54,9 @@ public class Player : MonoBehaviour
         Jump();
         FlipSprite();
         Die();
+
+        time = Time.time; //debug
+        SpeedBoost();
     }
 
     private void Run()
@@ -117,6 +131,23 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("LevelExit"))
         {            
             gameObject.SetActive(false);            
-        }             
-     }
+        }
+    }
+
+    void SpeedBoost()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !boosting && Time.time > currentBoostDelayTime)
+        { 
+            currentBoostTime = Time.time + boostTime; //start the timer for the boost
+            boosting = true;
+            runSpeed = 10f;
+        }
+
+        if ((Time.time > currentBoostTime) && boosting)
+        { 
+            boosting = false;
+            currentBoostDelayTime = Time.time + boostDelayTime;
+            runSpeed = 5f;
+        }           
+    }
 }

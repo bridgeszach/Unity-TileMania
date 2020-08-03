@@ -21,7 +21,7 @@ public class LevelExit : MonoBehaviour
         Time.timeScale = 1f;
 
         var currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex + 1);
+        SceneManager.LoadScene(currentSceneIndex + 1);        
     }
 }
     

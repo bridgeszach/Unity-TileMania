@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinPickup : MonoBehaviour
+public class GemPickup : MonoBehaviour
 {
     [SerializeField] AudioClip coinSFX;
-    [SerializeField] int coinValue = 20;
+    [SerializeField] int gemValue = 100;
 
     // Cached References
     AudioSource myAudio;
@@ -17,7 +17,7 @@ public class CoinPickup : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        FindObjectOfType<GameSession>().AddToScore(coinValue);
+        FindObjectOfType<GameSession>().AddToScore(gemValue);
         AudioSource.PlayClipAtPoint(coinSFX, Camera.main.transform.position);
         Destroy(gameObject);
     }
